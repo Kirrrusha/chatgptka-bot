@@ -1,0 +1,21 @@
+{
+  "name": "chatgptka-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "https-proxy-agent": "^7.0.2",
+    "openai": "^4.19.0",
+    "telegraf": "^4.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
