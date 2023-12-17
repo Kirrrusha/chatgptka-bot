@@ -18,14 +18,18 @@ const openai = new OpenAI({
 })
 
 function checkPermission(userId){
-    const permissionArray = (process.env.PERMISSIONS_ID_LIST || '').split(',').map((id) => Number(id));
-    return permissionArray.includes(userId);
+  if(process.env.NODE_ENV === 'development') {
+    return true
+  }
+
+  const permissionArray = (process.env.PERMISSIONS_ID_LIST || '').split(',').map((id) => Number(id));
+  return permissionArray.includes(userId);
 }
 
 // const CHATGPT_MODEL = 'code-davinci-edit-001'
 // const CHATGPT_MODEL = 'gpt-4'
-// const CHATGPT_MODEL = 'gpt-4-1106-preview'
-const CHATGPT_MODEL = 'gpt-3.5-turbo'
+const CHATGPT_MODEL = 'gpt-4'
+// const CHATGPT_MODEL = 'gpt-3.5-turbo'
 
 const ROLES = {
   DEVELOPER: 'developer',
@@ -59,41 +63,13 @@ async function chatGPT(content = '') {
     })
 
     return completion.choices[0].message;
+
   } catch (e) {
     console.error('Error while chat completion', e.message)
     return {
       content: e.message
     }
   }
-}
-
-async function chatGPT4(content = '') {
-  const messages = [
-    {
-      role: ROLES.SYSTEM,
-      content:
-        'Ты опытный разработчик, который знает всё о web',
-    },
-    { role: ROLES.USER, content },
-  ]
-  const stream = await openai.beta.chat.completions.stream({
-    model: 'gpt-4',
-    messages,
-    stream: true,
-  });
-
-  stream.on('content', (delta, snapshot) => {
-    process.stdout.write(delta);
-  });
-
-
-  for await (const chunk of stream) {
-    process.stdout.write(chunk.choices[0]?.delta?.content || '');
-  }
-
-  const chatCompletion = await stream.finalChatCompletion();
-  console.log('chatCompletion', chatCompletion); // {id: "…", choices: […], …}
-  return chatCompletion
 }
 
 const keyboard = Markup.keyboard([

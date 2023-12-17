@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start:dev": "nodemon index.js"
+    "start": "node index.js NODE_ENV=production",
+    "start:dev": "nodemon index.js NODE_ENV=development"
   },
   "author": "",
   "license": "ISC",
