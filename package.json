@@ -3,19 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js NODE_ENV=production",
-    "start:dev": "nodemon index.js NODE_ENV=development"
+    "start:dev": "nodemon index.js NODE_ENV=development",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
+    "grammy": "^1.20.1",
     "https-proxy-agent": "^7.0.2",
     "openai": "^4.19.0",
     "telegraf": "^4.15.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.2",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.1.1"
   }
 }
